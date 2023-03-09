@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title> GOMD Editor </title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+        <h1> GOMD Editor</h1>
+        <form method="post">
+            <textarea name="markdown" cols="80" rows="20"></textarea>
+            <br>
+            <input type="submit" value="Preview">
+        </form>
+        <div id="preview"></div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+            $(function() {
+                $('form').on('submit', function(event){
+                    event.preventDefault();
+                    var markdown = $('textarea[name="markdown"]').val();
+
+                    $.post('/', {markdown: markdown}, function(data) {
+                        $('#preview').html(data);
+                    });
+                });
+            });
+        </script>
+    </body>
+</html>
